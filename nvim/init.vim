@@ -1,9 +1,27 @@
+function Init()
+  :PlugInstall
+  colorscheme solarized8_flat
+endfunction
+
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
-    silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
-                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    autocmd!
-    autocmd VimEnter * PlugInstall
+  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+              \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd!
+  autocmd VimEnter * call Init()
 endif
+
+call plug#begin('~/.config/nvim/plugged')
+  Plug 'tpope/vim-fugitive'
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+  Plug 'lifepillar/vim-solarized8'
+  Plug 'StanAngeloff/php.vim', {'for': 'php'}
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+  Plug 'junegunn/fzf.vim'
+  Plug 'w0rp/ale'
+  Plug 'scrooloose/nerdtree'
+  Plug 'jeetsukumaran/vim-buffergator'
+call plug#end()
 
 set number
 set number relativenumber
@@ -22,11 +40,13 @@ set listchars=tab:>-,trail:*,extends:>,precedes:<
 " enter visual mode when selecting text and dont copy line numbers
 " set mouse+=a
 
-set fileencoding=iso-8859-1
+set fileencoding=utf-8
 set lazyredraw
 
-set directory=$HOME/.vim/swapfiles//
-set backupdir=$HOME/.vim/backups
+silent !mkdir -p $HOME/.nvim/swapfiles/
+silent !mkdir -p $HOME/.nvim/backups/
+set directory=$HOME/.nvim/swapfiles//
+set backupdir=$HOME/.nvim/backups
 
 set nocompatible
 filetype off
@@ -41,23 +61,15 @@ let g:fzf_action = {
   \ 'ctrl-h': 'botright split',
   \ 'ctrl-v': 'vertical botright split' }
 
-call plug#begin('~/.config/nvim/plugged')
-  Plug 'tpope/vim-fugitive'
-  Plug 'vim-airline/vim-airline'
-  Plug 'vim-airline/vim-airline-themes'
-  Plug 'lifepillar/vim-solarized8'
-  Plug 'StanAngeloff/php.vim', {'for': 'php'}
-  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-  Plug 'junegunn/fzf.vim'
-  Plug 'w0rp/ale'
-  Plug 'scrooloose/nerdtree'
-  Plug 'jeetsukumaran/vim-buffergator'
-call plug#end()
 
 filetype plugin indent on    " required
 
-set background=dark
-colorscheme solarized8_flat
+try
+  colorscheme solarized8_flat
+catch /^Vim\%((\a\+)\)\=:E185/
+  colorscheme default
+endtry
+
 
 nnoremap <C-p> :FZF<CR>
 nnoremap <C-s> :w<CR>
