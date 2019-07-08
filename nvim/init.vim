@@ -1,4 +1,4 @@
-function Init()
+function! Init()
   :PlugInstall
   colorscheme solarized8_flat
 endfunction
@@ -73,6 +73,10 @@ endtry
 
 nnoremap <C-p> :FZF<CR>
 nnoremap <C-s> :w<CR>
+command! WQ wq
+command! Wq wq
+command! W w
+command! Q q
 tnoremap <Esc> <C-\><C-n>
 map <C-l> :NERDTreeToggle<CR>
 map <C-M-l> :NERDTreeFind<CR>
