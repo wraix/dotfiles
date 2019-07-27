@@ -15,3 +15,7 @@ git config --global alias.visual '!gitk'
 # git unstage fileA
 # git reset HEAD -- fileA
 git config --global alias.unstage 'reset HEAD --'
+
+
+# omit --set-upstream origin branch with this - allows for git push -u instead
+git config --global push.default current

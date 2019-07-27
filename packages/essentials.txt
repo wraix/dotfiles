@@ -1,1 +1,1 @@
-git vim keepassxc
+git vim
