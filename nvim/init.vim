@@ -12,6 +12,9 @@ endif
 
 call plug#begin('~/.config/nvim/plugged')
   Plug 'tpope/vim-fugitive'
+  Plug 'tpope/vim-commentary'
+  Plug 'tpope/vim-surround'
+  Plug 'tpope/vim-repeat'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   Plug 'lifepillar/vim-solarized8'
@@ -21,13 +24,20 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'w0rp/ale'
   Plug 'scrooloose/nerdtree'
   Plug 'jeetsukumaran/vim-buffergator'
+  Plug 'airblade/vim-gitgutter'
+  Plug 'easymotion/vim-easymotion'
+  Plug 'svermeulen/vim-easyclip'
 call plug#end()
+
+let mapleader = ","
 
 set number
 set number relativenumber
 set visualbell
 set showmatch
 set hidden
+set noshowmode
+set clipboard=unnamed
 
 set shiftwidth=2
 set smartindent
@@ -52,8 +62,8 @@ set nocompatible
 filetype off
 
 let g:airline#extensions#tabline#enabled=1
-let g:airline_theme='solarized_flood'
 let g:airline_theme='onedark'
+let g:airline_powerline_fonts = 1
 
 let g:fzf_action = {
   \ 'ctrl-m': 'e',
@@ -83,7 +93,7 @@ map <C-M-l> :NERDTreeFind<CR>
 
 nnoremap <C-M> :bnext<CR>
 nnoremap <C-N> :bprev<CR>
-nnoremap <C-X> :bdelete<CR>
+nnoremap <leader>x :bdelete<CR>
 
 vnoremap // y/<C-R>"<CR>
 
@@ -94,18 +104,8 @@ command! -bang FLines call fzf#vim#grep(
 
 " autocmd BufWritePre * %s/\s\+$//e
 
-" Remap for destroying trailing whitespace cleanly
-:nnoremap <Leader>w :let _save_pos=getpos(".") <Bar>
-  \ :let _s=@/ <Bar>
-  \ :%s/\s\+$//e <Bar>
-  \ :let @/=_s <Bar>
-  \ :nohl <Bar>
-  \ :call setpos('.', _save_pos)<Bar>
-  \ :unlet _s<Bar>
-  \ :unlet _save_pos<CR>
-
-let g:NERDTreeDirArrowExpandable = '+'
-let g:NERDTreeDirArrowCollapsible = '-'
+" let g:NERDTreeDirArrowExpandable = '+'
+" let g:NERDTreeDirArrowCollapsible = '-'
 
 " disable linting while typing
 let g:ale_lint_on_text_changed = 'never'
@@ -120,6 +120,5 @@ let g:ale_php_phpcs_standard='phpcs.xml.dist'
 let g:ale_php_phpmd_ruleset='phpmd.xml'
 let g:ale_fixers = {
   \ '*': ['remove_trailing_lines', 'trim_whitespace'],
-  \ 'php': ['phpcbf', 'php_cs_fixer', 'remove_trailing_lines', 'trim_whitespace'],
   \}
 let g:ale_fix_on_save = 1
