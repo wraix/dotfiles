@@ -82,6 +82,7 @@ endtry
 
 
 nnoremap <C-p> :FZF<CR>
+nnoremap <C-M-p> :FLines<CR>
 nnoremap <C-s> :w<CR>
 command! WQ wq
 command! Wq wq
