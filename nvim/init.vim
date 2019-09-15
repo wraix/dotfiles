@@ -95,6 +95,10 @@ catch /^Vim\%((\a\+)\)\=:E185/
   colorscheme default
 endtry
 
+let g:airline#extensions#tabline#enabled=1
+let g:airline_theme='solarized'
+let g:airline_powerline_fonts = 1
+
 filetype indent on    " Use filetype indentation
 filetype plugin indent on " Allow plugins to use filetype indentation
 
