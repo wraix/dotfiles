@@ -160,7 +160,7 @@ let g:ctrlp_max_files=0
 let g:ctrlp_match_window = 'min:1,max:25'
 let g:ctrlp_cmd='CtrlP :pwd'
 
-if !exists('ctags')
+if !executable('ctags')
   let g:gutentags_enabled = 0
 endif
 
