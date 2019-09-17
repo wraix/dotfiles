@@ -11,10 +11,11 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 endif
 
 if has('nvim')
-  call plug#begin('~/.config/nvim/plugged')
+  call plug#begin('~/.config/nvim/plugins')
 else
   call plug#begin('~/.vim/bundle')
 endif
+  Plug 'ludovicchabant/vim-gutentags'
   " Git for vim, :G... to use
   Plug 'tpope/vim-fugitive'
   " Quick surrounding with eg. ys<motion> (remember with 'you surround')
@@ -33,15 +34,15 @@ endif
   " Show colors in css
   Plug 'ap/vim-css-color'
   " install fzf for quick find and open files
-  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+  " Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   " Vim plugin for fzf
-  Plug 'junegunn/fzf.vim'
+  " Plug 'junegunn/fzf.vim'
+  Plug 'kien/ctrlp.vim'
   " Async linter
   Plug 'w0rp/ale'
   " Directory explorer
   Plug 'scrooloose/nerdtree'
   " Easier buffer handling <leader>b
-  Plug 'jeetsukumaran/vim-buffergator'
   Plug 'moll/vim-bbye'
   " Show git changes in gutter
   Plug 'airblade/vim-gitgutter'
@@ -66,11 +67,8 @@ call plug#end()
 
 let mapleader = ","
 
-silent !mkdir -p $HOME/.nvim/{swapfiles,backups}
-" Make an undo directory if it does not exist
-if !isdirectory($HOME . "/.config/nvim/undo")
-  call mkdir($HOME . "/.config/nvim/undo", "p")
-endif
+" Make an undo, backup and swapfiles directory if it does not exist
+silent !mkdir -p $HOME/.config/nvim/{.swap,.backup,.undo}
 
 "--------------------------
 "|      Color scheme      |
@@ -104,14 +102,13 @@ filetype indent on    " Use filetype indentation
 filetype plugin indent on " Allow plugins to use filetype indentation
 
 
-
 "--------------------------
 "|        Settings        |
 "--------------------------
 
-set directory=$HOME/.nvim/swapfiles//
-set backupdir=$HOME/.nvim/backups
-set undodir=~/.config/nvim/undo " Set the undo directory
+set directory=$HOME/.config/nvim/.swap//
+set backupdir=$HOME/.config/nvim/.backup//
+set undodir=~/.config/nvim/.undo// " Set the undo directory
 set undofile                    " Turn on persistent undo
 set undoreload=10000
 set backspace=indent,eol,start  " Make backspace behave in a sane manner.
@@ -157,6 +154,16 @@ command! -bang FLines call fzf#vim#grep(
 
 " autocmd BufWritePre * %s/\s\+$//e
 
+let g:ctrlp_working_path_mode=''
+let g:ctrlp_max_depth=40
+let g:ctrlp_max_files=0
+let g:ctrlp_match_window = 'min:1,max:25'
+let g:ctrlp_cmd='CtrlP :pwd'
+
+if !exists('ctags')
+  let g:gutentags_enabled = 0
+endif
+
 let g:fzf_action = {
   \ 'ctrl-m': 'e',
   \ 'ctrl-t': 'tabedit',
@@ -192,12 +199,13 @@ tnoremap <Esc> <C-\><C-n>
 map <C-l> :NERDTreeToggle<CR>
 map <C-M-l> :NERDTreeFind<CR>
 
-nnoremap <C-p> :FZF<CR>
-nnoremap <C-M-p> :FLines<CR>
+nnoremap <C-p> :CtrlP<CR>
+" nnoremap <C-p> :FZF<CR>
 nnoremap <C-s> :w<CR>
 nnoremap <C-M> :bnext<CR>
 nnoremap <C-N> :bprev<CR>
-nnoremap <leader>x :bdelete<CR>
+" note capital B to use vim-bbye plugin
+nnoremap <leader>x :Bdelete<CR>
 nnoremap * :keepjumps normal! mi*`i<CR>
 vnoremap // y/<C-R>"<CR>
 
