@@ -42,6 +42,7 @@ endif
   Plug 'scrooloose/nerdtree'
   " Easier buffer handling <leader>b
   Plug 'jeetsukumaran/vim-buffergator'
+  Plug 'moll/vim-bbye'
   " Show git changes in gutter
   Plug 'airblade/vim-gitgutter'
   " Faster moving in files <leader><leader>w|b
@@ -179,9 +180,6 @@ let g:ale_fixers = { '*': ['remove_trailing_lines', 'trim_whitespace'] }
 "|        Mappings        |
 "--------------------------
 
-nnoremap <C-p> :FZF<CR>
-nnoremap <C-M-p> :FLines<CR>
-nnoremap <C-s> :w<CR>
 command! WQ wq
 command! Wq wq
 command! W w
@@ -190,9 +188,13 @@ tnoremap <Esc> <C-\><C-n>
 map <C-l> :NERDTreeToggle<CR>
 map <C-M-l> :NERDTreeFind<CR>
 
+nnoremap <C-p> :FZF<CR>
+nnoremap <C-M-p> :FLines<CR>
+nnoremap <C-s> :w<CR>
 nnoremap <C-M> :bnext<CR>
 nnoremap <C-N> :bprev<CR>
 nnoremap <leader>x :bdelete<CR>
+nnoremap * :keepjumps normal! mi*`i<CR>
 vnoremap // y/<C-R>"<CR>
 
 " nnoremap <up> <C-w>k
