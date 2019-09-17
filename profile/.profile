@@ -8,41 +8,52 @@ export `gnome-keyring-daemon -s -d -c pkcsll,secrets,ssh`
 
 
 # Foreground colors, Normal (non-bold) is the default, so the 0; prefix is optional.
-FG_DARKGRAY="\e[0;30m"
-FG_BOLD_DARKGRAY="\e[1;30m"
-FG_RED="\e[0;31m"
-FG_BOLD_RED="\e[1;31m"
-FG_GREEN="\e[0;32m"
-FG_BOLD_GREEN="\e[1;32m"
-FG_YELLOW="\e[0;33m"
-FG_BOLD_YELLOW="\e[1;33m"
-FG_BLUE="\e[0;34m"
-FG_BOLD_BLUE="\e[1;34m"
-FG_PURPLE="\e[0;35m"
-FG_BOLD_PURPLE="\e[1;35m"
-FG_TURQUOISE="\e[0;36m"
-FG_BOLD_TURQUOISE="\e[1;36m"
-FG_LIGHTGRAY="\e[0;37m"
-FG_BOLD_LIGHTGRAY="\e[1;37m"
+FG_DARKGRAY="\[0;30m"
+FG_BOLD_DARKGRAY="\[1;30m"
+FG_RED="\[0;31m"
+FG_BOLD_RED="\[1;31m"
+FG_GREEN="\[0;32m"
+FG_BOLD_GREEN="\[1;32m"
+FG_YELLOW="\[0;33m"
+FG_BOLD_YELLOW="\[1;33m"
+FG_BLUE="\[0;34m"
+FG_BOLD_BLUE="\[1;34m"
+FG_PURPLE="\[0;35m"
+FG_BOLD_PURPLE="\[1;35m"
+FG_TURQUOISE="\[0;36m"
+FG_BOLD_TURQUOISE="\[1;36m"
+FG_LIGHTGRAY="\[0;37m"
+FG_BOLD_LIGHTGRAY="\[1;37m"
 
 # Background colors
-BG_DARKGRAY="\e[40m"
-BG_RED="\e[41m"
-BG_GREEN="\e[42m"
-BG_YELLOW="\e[43m"
-BG_BLUE="\e[44m"
-BG_PURPLE="\e[45m"
-BG_TURQUOISE="\e[46m"
-BG_LIGHTGRAY="\e[47m"
+BG_DARKGRAY="\[40m"
+BG_RED="\[41m"
+BG_GREEN="\[42m"
+BG_YELLOW="\[43m"
+BG_BLUE="\[44m"
+BG_PURPLE="\[45m"
+BG_TURQUOISE="\[46m"
+BG_LIGHTGRAY="\[47m"
 
 # end color
 EC="\]";
 
 # Reset color
-RC="\[\e[0m\]"
+RC="\[\[0m\]"
 
-parse_git_branch() {
-     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+function color_my_prompt {
+    local __user_and_host="\[\033[01;32m\]\u@\h"
+    local __cur_location="\[\033[01;34m\]\w"
+    local __git_branch_color="\[\033[31m\]"
+    #local __git_branch="\`ruby -e \"print (%x{git branch 2> /dev/null}.grep(/^\*/).first || '').gsub(/^\* (.+)$/, '(\1) ')\"\`"
+    local __git_branch='`git branch 2> /dev/null | grep -e ^* | sed -E  s/^\\\\\*\ \(.+\)$/\(\\\\\1\)\ /`'
+    local __prompt_tail="\[\033[35m\]$"
+    local __last_color="\[\033[00m\]"
+    export PS1="$__user_and_host $__cur_location $__git_branch_color$__git_branch$__prompt_tail$__last_color "
 }
+color_my_prompt
 
-export PS1="$FG_BOLD_BLUE\u@\h$EC $FG_BOLD_YELLOW\w$EC$FG_BOLD_RED\$(parse_git_branch)$EC$RC \$ "
+#parse_git_branch() {
+     #git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+#}
+# export PS1="$FG_BOLD_BLUE\u@\h$EC $FG_BOLD_YELLOW\w$EC$FG_BOLD_RED\$(parse_git_branch)$EC$RC \$ "

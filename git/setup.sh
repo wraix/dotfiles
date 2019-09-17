@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # profile
 git config --global user.name 'Lasse Nielsen'
@@ -16,6 +16,15 @@ git config --global alias.visual '!gitk'
 # git reset HEAD -- fileA
 git config --global alias.unstage 'reset HEAD --'
 
-
 # omit --set-upstream origin branch with this - allows for git push -u instead
 git config --global push.default current
+
+# enable global ignore file for all projects
+git config --global core.excludesfile ~/.gitignore_global
+
+if [ ! -f ~/.gitignore_global ]; then
+  touch ~/.gitignore_global
+  echo "tags" > ~/.gitignose_globals
+else
+  echo "Found ~/.gitignore_global, leaving it alone"
+fi
