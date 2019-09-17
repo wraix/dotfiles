@@ -45,4 +45,4 @@ parse_git_branch() {
      git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
 
-export PS1="$FG_BOLD_BLUE\u@\h$EC $FG_BOLD_YELLOW\w$EC$FG_BOLD_RED$(parse_git_branch)$EC$RC \$ "
+export PS1="$FG_BOLD_BLUE\u@\h$EC $FG_BOLD_YELLOW\w$EC$FG_BOLD_RED\$(parse_git_branch)$EC$RC \$ "
