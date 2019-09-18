@@ -24,7 +24,7 @@ git config --global core.excludesfile ~/.gitignore_global
 
 if [ ! -f ~/.gitignore_global ]; then
   touch ~/.gitignore_global
-  echo "tags" > ~/.gitignose_globals
+  echo "tags" > ~/.gitignore_global
 else
   echo "Found ~/.gitignore_global, leaving it alone"
 fi
