@@ -200,6 +200,7 @@ map <C-l> :NERDTreeToggle<CR>
 map <C-M-l> :NERDTreeFind<CR>
 
 nnoremap <C-p> :CtrlP<CR>
+nnoremap <C-f> :CtrlPTag<CR>
 " nnoremap <C-p> :FZF<CR>
 nnoremap <C-s> :w<CR>
 nnoremap <C-M> :bnext<CR>
