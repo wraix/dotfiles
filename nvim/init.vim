@@ -140,6 +140,8 @@ set splitright        " Make vertical splits on the right
 set scrolloff=3       " Start scrolling when the cursor is 3 lines away from the bottom of the window
 set cursorline        " Highlight the current line
 set autoread          " Automatically reload the file when it is changed from an outside program
+set numberwidth=5     " give gutter a bit more spacing to prevent jumping
+set mouse=a           " make mouse interactive
 
 " enter visual mode when selecting text and dont copy line numbers
 " set mouse+=a
