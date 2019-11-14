@@ -34,10 +34,9 @@ endif
   " Show colors in css
   Plug 'ap/vim-css-color'
   " install fzf for quick find and open files
-  " Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   " Vim plugin for fzf
-  " Plug 'junegunn/fzf.vim'
-  Plug 'kien/ctrlp.vim'
+  Plug 'junegunn/fzf.vim'
   " Async linter
   Plug 'w0rp/ale'
   " Directory explorer
@@ -155,12 +154,6 @@ command! -bang FLines call fzf#vim#grep(
      \ {'options': '--reverse --prompt "FLines> "'})
 
 " autocmd BufWritePre * %s/\s\+$//e
-
-let g:ctrlp_working_path_mode=''
-let g:ctrlp_max_depth=40
-let g:ctrlp_max_files=0
-let g:ctrlp_match_window = 'min:1,max:25'
-let g:ctrlp_cmd='CtrlP :pwd'
 
 if !executable('ctags')
   let g:gutentags_enabled = 0

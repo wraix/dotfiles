@@ -7,15 +7,12 @@
 !_TAG_PROGRAM_VERSION	0.0.0	/3fdf28bc/
 *	nvim/init.vim	/^nnoremap * :keepjumps normal! mi*`i<CR>$/;"	m
 //	nvim/init.vim	/^vnoremap \/\/ y\/<C-R>"<CR>$/;"	m
-0	test.json	/^      123,$/;"	n	array:0.testd
-0	test.json	/^  {$/;"	o
-1	test.json	/^      124,$/;"	n	array:0.testd
-2	test.json	/^      125$/;"	n	array:0.testd
 <C-M-l>	nvim/init.vim	/^map <C-M-l> :NERDTreeFind<CR>$/;"	m
 <C-M>	nvim/init.vim	/^nnoremap <C-M> :bnext<CR>$/;"	m
 <C-N>	nvim/init.vim	/^nnoremap <C-N> :bprev<CR>$/;"	m
 <C-c>	nvim/init.vim	/^inoremap <C-c> <Esc>$/;"	m
 <C-c>	nvim/init.vim	/^nnoremap <C-c> <Esc>$/;"	m
+<C-f>	nvim/init.vim	/^nnoremap <C-f> :CtrlPTag<CR>$/;"	m
 <C-l>	nvim/init.vim	/^map <C-l> :NERDTreeToggle<CR>$/;"	m
 <C-p>	nvim/init.vim	/^nnoremap <C-p> :CtrlP<CR>$/;"	m
 <C-s>	nvim/init.vim	/^nnoremap <C-s> :w<CR>$/;"	m
@@ -41,11 +38,6 @@ g:ale_php_phpcbf_standard	nvim/init.vim	/^let g:ale_php_phpcbf_standard='PSR2'$/
 g:ale_php_phpcs_standard	nvim/init.vim	/^let g:ale_php_phpcs_standard='phpcs.xml.dist'$/;"	v
 g:ale_php_phpmd_ruleset	nvim/init.vim	/^let g:ale_php_phpmd_ruleset='phpmd.xml'$/;"	v
 g:ale_set_quickfix	nvim/init.vim	/^let g:ale_set_quickfix=0$/;"	v
-g:ctrlp_cmd	nvim/init.vim	/^let g:ctrlp_cmd='CtrlP :pwd'$/;"	v
-g:ctrlp_match_window	nvim/init.vim	/^let g:ctrlp_match_window = 'min:1,max:25'$/;"	v
-g:ctrlp_max_depth	nvim/init.vim	/^let g:ctrlp_max_depth=40$/;"	v
-g:ctrlp_max_files	nvim/init.vim	/^let g:ctrlp_max_files=0$/;"	v
-g:ctrlp_working_path_mode	nvim/init.vim	/^let g:ctrlp_working_path_mode=''$/;"	v
 g:fzf_action	nvim/init.vim	/^let g:fzf_action = {$/;"	v
 g:gutentags_enabled	nvim/init.vim	/^  let g:gutentags_enabled = 0$/;"	v
 g:solarized_diffmode	nvim/init.vim	/^  let g:solarized_diffmode="normal"$/;"	v
@@ -61,10 +53,3 @@ ga	nvim/init.vim	/^xmap ga <Plug>(EasyAlign)$/;"	m
 j	nvim/init.vim	/^nnoremap j gj$/;"	m
 k	nvim/init.vim	/^nnoremap k gk$/;"	m
 mapleader	nvim/init.vim	/^let mapleader = ","$/;"	v
-testa	test.json	/^      "testa": 123,$/;"	n	object:0.teste
-testa	test.json	/^    "testa": 111,$/;"	n	object:0
-testb	test.json	/^      "testb": 1234$/;"	n	object:0.teste
-testb	test.json	/^    "testb": 111,$/;"	n	object:0
-testc	test.json	/^    "testc": 111,$/;"	n	object:0
-testd	test.json	/^    "testd": [$/;"	a	object:0
-teste	test.json	/^    "teste": {$/;"	o	object:0
