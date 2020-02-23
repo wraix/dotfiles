@@ -217,8 +217,8 @@ nnoremap <C-c> <Esc>
 nnoremap j gj
 nnoremap k gk
 
-" Start interactive EasyAlign in visual mode (e.g. vipga)
-xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign in visual mode (e.g. vip<leader>a)
+xmap <leader>a <Plug>(EasyAlign)
 
-" Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. <leader>aip)
+nmap <leader>a <Plug>(EasyAlign)
