@@ -57,7 +57,7 @@ bindsym $mod+Ctrl+m exec pavucontrol
 
 # Start Applications
 bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
-bindsym $mod+F2 exec palemoon
+bindsym $mod+F2 exec firefox
 bindsym $mod+F3 exec pcmanfm
 # bindsym $mod+F3 exec ranger
 bindsym $mod+Shift+F3 exec gksu pcmanfm
@@ -74,10 +74,10 @@ bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 focus_follows_mouse no
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+#bindsym $mod+j focus left
+#bindsym $mod+k focus down
+#bindsym $mod+l focus up
+#bindsym $mod+semicolon focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -86,10 +86,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
+#bindsym $mod+Shift+j move left
+#bindsym $mod+Shift+k move down
+#bindsym $mod+Shift+l move up
+#bindsym $mod+Shift+semicolon move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -232,62 +232,59 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # Set shut down, restart and locking features
-bindsym $mod+0 mode "$mode_system"
+bindsym $mod+Escape mode "$mode_system"
 set $mode_system (l)ock, (e)xit, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
 mode "$mode_system" {
-    bindsym l exec --no-startup-id i3exit lock, mode "default"
-    bindsym s exec --no-startup-id i3exit suspend, mode "default"
-    bindsym u exec --no-startup-id i3exit switch_user, mode "default"
-    bindsym e exec --no-startup-id i3exit logout, mode "default"
-    bindsym h exec --no-startup-id i3exit hibernate, mode "default"
-    bindsym r exec --no-startup-id i3exit reboot, mode "default"
-    bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"
+  bindsym l exec --no-startup-id i3exit lock, mode "default"
+  bindsym s exec --no-startup-id i3exit suspend, mode "default"
+  bindsym u exec --no-startup-id i3exit switch_user, mode "default"
+  bindsym e exec --no-startup-id i3exit logout, mode "default"
+  bindsym h exec --no-startup-id i3exit hibernate, mode "default"
+  bindsym r exec --no-startup-id i3exit reboot, mode "default"
+  bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"
 
-    # exit system mode: "Enter" or "Escape"
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
+  # exit system mode: "Enter" or "Escape"
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
 }
 
 # Resize window (you can also use the mouse for that)
 bindsym $mod+r mode "resize"
 mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 5 px or 5 ppt
-        bindsym k resize grow height 5 px or 5 ppt
-        bindsym l resize shrink height 5 px or 5 ppt
-        bindsym semicolon resize grow width 5 px or 5 ppt
+  # These bindings trigger as soon as you enter the resize mode
+  # Pressing left will shrink the window’s width.
+  # Pressing right will grow the window’s width.
+  # Pressing up will shrink the window’s height.
+  # Pressing down will grow the window’s height.
+  #bindsym j resize shrink width 5 px or 5 ppt
+  #bindsym k resize grow height 5 px or 5 ppt
+  #bindsym l resize shrink height 5 px or 5 ppt
+  #bindsym semicolon resize grow width 5 px or 5 ppt
 
-        # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+  # same bindings, but for the arrow keys
+  bindsym Left resize shrink width 5 px or 5 ppt
+  bindsym Down resize grow height 5 px or 5 ppt
+  bindsym Up resize shrink height 5 px or 5 ppt
+  bindsym Right resize grow width 5 px or 5 ppt
 
-        # exit resize mode: Enter or Escape
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
+  # exit resize mode: Enter or Escape
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
 }
 
 # Lock screen
-bindsym $mod+9 exec --no-startup-id blurlock && xset dpms force off
+bindsym $mod+l exec --no-startup-id i3lock -c#000000 && xset dpms force off
 
 # Autostart applications
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id nitrogen --restore; sleep 1; compton -b
-#exec --no-startup-id manjaro-hello
 exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id pamac-tray
 exec --no-startup-id clipit
-# exec --no-startup-id blueman-applet
-# exec_always --no-startup-id sbxkb
 exec --no-startup-id start_conky_maia
-# exec --no-startup-id start_conky_green
-exec --no-startup-id xautolock -corners --00 -time 30 -notify 10 -locker "blurlock && xset dpms force off"
+exec --no-startup-id xautolock -corners --00 -time 30 -notify 10 -locker "i3lock -c#000000 && xset dpms force off"
+exec --no-startup-id feh --bg-fill ~/.i3/bg/bg.png
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
 
@@ -324,31 +321,30 @@ set_from_resource $term_color15    color15
 
 # Start i3bar to display a workspace bar (plus the system information i3status if available)
 bar {
-	i3bar_command i3bar
-	status_command i3status
-	position bottom
+  i3bar_command i3bar
+  status_command i3status
+  position top
 
 ## please set your primary output first. Example: 'xrandr --output eDP1 --primary'
-	tray_output primary
-#	tray_output eDP1
+  tray_output primary
 
-	bindsym button4 nop
-	bindsym button5 nop
+  bindsym button4 nop
+  bindsym button5 nop
 #   font xft:URWGothic-Book 11
-	strip_workspace_numbers yes
+  strip_workspace_numbers yes
 
-    colors {
-        background #222D31
-        statusline #F9FAF9
-        separator  #454947
+  colors {
+    background #222D31
+    statusline #F9FAF9
+    separator  #454947
 
 #                      border  backgr. text
-        focused_workspace  #F9FAF9 #16a085 #292F34
-        active_workspace   #595B5B #353836 #FDF6E3
-        inactive_workspace #595B5B #222D31 #EEE8D5
-        binding_mode       #16a085 #2C2C2C #F9FAF9
-        urgent_workspace   #16a085 #FDF6E3 #E5201D
-    }
+    focused_workspace  #F9FAF9 #16a085 #292F34
+    active_workspace   #595B5B #353836 #FDF6E3
+    inactive_workspace #595B5B #222D31 #EEE8D5
+    binding_mode       #16a085 #2C2C2C #F9FAF9
+    urgent_workspace   #16a085 #FDF6E3 #E5201D
+  }
 }
 
 # hide/unhide i3status bar
@@ -356,13 +352,13 @@ bindsym $mod+m bar mode toggle
 
 # Theme colors
 # class                   border  backgr. text    indic.   child_border
-  client.focused          #556064 #34be5b #80FFF9 #FDF6E3
-  client.focused_inactive #2F3D44 #2F3D44 #1ABC9C #454948
-  client.unfocused        #2F3D44 #2F3D44 #1ABC9C #454948
+  client.focused          #27ae60 #27ae60 #80FFF9 #FDF6E3
+  client.focused_inactive #d35400 #d35400 #80FFF9 #454948
+  client.unfocused        #444444 #444444 #1ABC9C #454948
   client.urgent           #CB4B16 #FDF6E3 #1ABC9C #268BD2
   client.placeholder      #000000 #0c0c0c #ffffff #000000
 
-  client.background       #2B2C2B
+  client.background       #000000
 
 # class                 border  bground text    indicator child_border
 # client.focused          #4C7899 #285577 #FFFFFF #2E9EF4   #285577
@@ -379,8 +375,8 @@ bindsym $mod+m bar mode toggle
 #############################
 
 # Set inner/outer gaps
-gaps inner 14
-gaps outer -2
+gaps inner 10
+gaps outer 0
 
 # Additionally, you can issue commands with the following syntax. This is useful to bind keys to changing the gap size.
 # gaps inner|outer current|all set|plus|minus <px>
