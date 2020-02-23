@@ -1,18 +1,20 @@
-function! Init()
-  :PlugInstall
-  colorscheme solarized8
-endfunction
-
-if empty(glob('~/.config/nvim/autoload/plug.vim'))
-  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
-              \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd!
-  autocmd VimEnter * call Init()
-endif
+set nocompatible
 
 if has('nvim')
+  if empty(glob('~/.config/nvim/autoload/plug.vim'))
+    silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+      \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync
+  endif
+
   call plug#begin('~/.config/nvim/plugins')
 else
+  if empty(glob('~/.vim/autoload/plug.vim'))
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+      \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync
+  endif
+
   call plug#begin('~/.vim/bundle')
 endif
   Plug 'ludovicchabant/vim-gutentags'
@@ -51,8 +53,6 @@ endif
   Plug 'svermeulen/vim-easyclip'
   " Enables filecontrols directly within vim; :Move, :Delete, :Rename, etc.
   Plug 'tpope/vim-eunuch'
-  " Split one-liners into blocks and other way around; gS (split) and gJ (join)
-  Plug 'andrewradev/splitjoin.vim'
   " Align with ga
   Plug 'junegunn/vim-easy-align'
   " More targets to make actions on; eg. inq (in quotes), seperators (special
@@ -117,8 +117,7 @@ set visualbell
 set showmatch
 set hidden
 set noshowmode
-set clipboard=unnamed
-set nocompatible
+set clipboard=unnamedplus
 set shiftwidth=2
 set smartindent
 set autoindent        " Use autoindentation
@@ -181,6 +180,25 @@ let g:ale_php_phpcs_standard='phpcs.xml.dist'
 let g:ale_php_phpmd_ruleset='phpmd.xml'
 let g:ale_fix_on_save = 1
 let g:ale_fixers = { '*': ['remove_trailing_lines', 'trim_whitespace'] }
+
+let g:php_sql_query = 1
+let g:php_sql_heredoc = 1
+let g:php_html_in_nowdoc = 1
+let g:php_html_load = 0
+let g:php_html_in_heredoc = 1
+let g:php_sql_nowdoc = 1
+let g:php_var_selector_is_identifier = 1
+let g:php_syntax_extensions_enabled = ["bcmath", "bz2", "core", "curl", "date", "dom", "ereg", "gd", "gettext", "hash", "iconv", "json", "libxml", "mbstring", "mcrypt", "mhash", "mysql", "mysqli", "openssl", "pcre", "pdo", "pgsql", "phar", "reflection", "session", "simplexml", "soap", "sockets", "spl", "sqlite3", "standard", "tokenizer", "wddx", "xml", "xmlreader", "xmlwriter", "zip", "zlib"]
+
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_winsize = 25
+augroup ProjectDrawer
+  autocmd!
+  autocmd VimEnter * :Vexplore
+augroup END
 
 "--------------------------
 "|        Mappings        |
