@@ -67,7 +67,11 @@ call plug#end()
 let mapleader = ","
 
 " Make an undo, backup and swapfiles directory if it does not exist
-silent !mkdir -p $HOME/.config/nvim/{.swap,.backup,.undo}
+if has('nvim')
+  silent !mkdir -p $HOME/.config/nvim/{.swap,.backup,.undo}
+else
+  silent !mkdir -p $HOME/.vim/{.swap,.backup,.undo}
+endif
 
 "--------------------------
 "|      Color scheme      |
@@ -105,9 +109,16 @@ filetype plugin indent on " Allow plugins to use filetype indentation
 "|        Settings        |
 "--------------------------
 
-set directory=$HOME/.config/nvim/.swap//
-set backupdir=$HOME/.config/nvim/.backup//
-set undodir=~/.config/nvim/.undo// " Set the undo directory
+if has('nvim')
+  set directory=$HOME/.config/nvim/.swap//
+  set backupdir=$HOME/.config/nvim/.backup//
+  set undodir=~/.config/nvim/.undo// " Set the undo directory
+else
+  set directory=$HOME/.vim/.swap//
+  set backupdir=$HOME/.vim/.backup//
+  set undodir=~/.vim/.undo// " Set the undo directory
+endif
+
 set undofile                    " Turn on persistent undo
 set undoreload=10000
 set backspace=indent,eol,start  " Make backspace behave in a sane manner.
@@ -195,10 +206,6 @@ let g:netrw_liststyle = 3
 let g:netrw_browse_split = 4
 let g:netrw_altv = 1
 let g:netrw_winsize = 25
-augroup ProjectDrawer
-  autocmd!
-  autocmd VimEnter * :Vexplore
-augroup END
 
 "--------------------------
 "|        Mappings        |

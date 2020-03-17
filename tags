@@ -1,10 +1,11 @@
 !_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
 !_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_FILESEP	slash	/slash or backslash/
 !_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
 !_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
 !_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
 !_TAG_PROGRAM_URL	https://ctags.io/	/official site/
-!_TAG_PROGRAM_VERSION	0.0.0	/3fdf28bc/
+!_TAG_PROGRAM_VERSION	0.0.0	/a3c87ab5/
 *	nvim/init.vim	/^nnoremap * :keepjumps normal! mi*`i<CR>$/;"	m
 //	nvim/init.vim	/^vnoremap \/\/ y\/<C-R>"<CR>$/;"	m
 <C-M-l>	nvim/init.vim	/^map <C-M-l> :NERDTreeFind<CR>$/;"	m
@@ -12,13 +13,14 @@
 <C-N>	nvim/init.vim	/^nnoremap <C-N> :bprev<CR>$/;"	m
 <C-c>	nvim/init.vim	/^inoremap <C-c> <Esc>$/;"	m
 <C-c>	nvim/init.vim	/^nnoremap <C-c> <Esc>$/;"	m
-<C-f>	nvim/init.vim	/^nnoremap <C-f> :CtrlPTag<CR>$/;"	m
+<C-f>	nvim/init.vim	/^nnoremap <C-f> :Tags<CR>$/;"	m
 <C-l>	nvim/init.vim	/^map <C-l> :NERDTreeToggle<CR>$/;"	m
-<C-p>	nvim/init.vim	/^nnoremap <C-p> :CtrlP<CR>$/;"	m
+<C-p>	nvim/init.vim	/^nnoremap <C-p> :FZF<CR>$/;"	m
 <C-s>	nvim/init.vim	/^nnoremap <C-s> :w<CR>$/;"	m
+<leader>a	nvim/init.vim	/^nmap <leader>a <Plug>(EasyAlign)$/;"	m
+<leader>a	nvim/init.vim	/^xmap <leader>a <Plug>(EasyAlign)$/;"	m
 <leader>x	nvim/init.vim	/^nnoremap <leader>x :Bdelete<CR>$/;"	m
 FLines	nvim/init.vim	/^command! -bang FLines call fzf#vim#grep($/;"	c
-Init	nvim/init.vim	/^function! Init()$/;"	f
 Q	nvim/init.vim	/^command! Q q$/;"	c
 W	nvim/init.vim	/^command! W w$/;"	c
 WQ	nvim/init.vim	/^command! WQ wq$/;"	c
@@ -40,6 +42,19 @@ g:ale_php_phpmd_ruleset	nvim/init.vim	/^let g:ale_php_phpmd_ruleset='phpmd.xml'$
 g:ale_set_quickfix	nvim/init.vim	/^let g:ale_set_quickfix=0$/;"	v
 g:fzf_action	nvim/init.vim	/^let g:fzf_action = {$/;"	v
 g:gutentags_enabled	nvim/init.vim	/^  let g:gutentags_enabled = 0$/;"	v
+g:netrw_altv	nvim/init.vim	/^let g:netrw_altv = 1$/;"	v
+g:netrw_banner	nvim/init.vim	/^let g:netrw_banner = 0$/;"	v
+g:netrw_browse_split	nvim/init.vim	/^let g:netrw_browse_split = 4$/;"	v
+g:netrw_liststyle	nvim/init.vim	/^let g:netrw_liststyle = 3$/;"	v
+g:netrw_winsize	nvim/init.vim	/^let g:netrw_winsize = 25$/;"	v
+g:php_html_in_heredoc	nvim/init.vim	/^let g:php_html_in_heredoc = 1$/;"	v
+g:php_html_in_nowdoc	nvim/init.vim	/^let g:php_html_in_nowdoc = 1$/;"	v
+g:php_html_load	nvim/init.vim	/^let g:php_html_load = 0$/;"	v
+g:php_sql_heredoc	nvim/init.vim	/^let g:php_sql_heredoc = 1$/;"	v
+g:php_sql_nowdoc	nvim/init.vim	/^let g:php_sql_nowdoc = 1$/;"	v
+g:php_sql_query	nvim/init.vim	/^let g:php_sql_query = 1$/;"	v
+g:php_syntax_extensions_enabled	nvim/init.vim	/^let g:php_syntax_extensions_enabled = ["bcmath", "bz2", "core", "curl", "date", "dom", "ereg", "/;"	v
+g:php_var_selector_is_identifier	nvim/init.vim	/^let g:php_var_selector_is_identifier = 1$/;"	v
 g:solarized_diffmode	nvim/init.vim	/^  let g:solarized_diffmode="normal"$/;"	v
 g:solarized_extra_hi_groups	nvim/init.vim	/^  let g:solarized_extra_hi_groups=1$/;"	v
 g:solarized_italics	nvim/init.vim	/^  let g:solarized_italics=1$/;"	v
@@ -48,8 +63,6 @@ g:solarized_statusline	nvim/init.vim	/^  let g:solarized_statusline="normal"$/;"
 g:solarized_termtrans	nvim/init.vim	/^  let g:solarized_termtrans=0$/;"	v
 g:solarized_use16	nvim/init.vim	/^  let g:solarized_use16=0$/;"	v
 g:solarized_visibility	nvim/init.vim	/^  let g:solarized_visibility="nowmal"$/;"	v
-ga	nvim/init.vim	/^nmap ga <Plug>(EasyAlign)$/;"	m
-ga	nvim/init.vim	/^xmap ga <Plug>(EasyAlign)$/;"	m
 j	nvim/init.vim	/^nnoremap j gj$/;"	m
 k	nvim/init.vim	/^nnoremap k gk$/;"	m
 mapleader	nvim/init.vim	/^let mapleader = ","$/;"	v

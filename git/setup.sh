@@ -20,11 +20,13 @@ git config --global alias.unstage 'reset HEAD --'
 git config --global push.default current
 
 # enable global ignore file for all projects
-git config --global core.excludesfile ~/.gitignore_global
+git config --global core.excludesfile ~/.config/git/ignore
 
-if [ ! -f ~/.gitignore_global ]; then
-  touch ~/.gitignore_global
-  echo "tags" > ~/.gitignore_global
+mkdir -p ~/.config/git
+if [ ! -f ~/.config/git/ignore ]; then
+  touch ~/.config/git/ignore
+  echo "tags" >> ~/.config/git/ignore
+  echo "tags.temp" >> ~/.config/git/ignore
 else
-  echo "Found ~/.gitignore_global, leaving it alone"
+  echo "Found ~/.config/git/ignore, leaving it alone"
 fi
