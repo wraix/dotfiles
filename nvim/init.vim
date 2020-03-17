@@ -192,13 +192,13 @@ let g:ale_php_phpmd_ruleset='phpmd.xml'
 let g:ale_fix_on_save = 1
 let g:ale_fixers = { '*': ['remove_trailing_lines', 'trim_whitespace'] }
 
-let g:php_sql_query = 1
+let g:php_sql_query = 0
 let g:php_sql_heredoc = 1
-let g:php_html_in_nowdoc = 1
+let g:php_sql_nowdoc = 1
 let g:php_html_load = 0
 let g:php_html_in_heredoc = 1
-let g:php_sql_nowdoc = 1
-let g:php_var_selector_is_identifier = 1
+let g:php_html_in_nowdoc = 1
+let g:php_var_selector_is_identifier = 0
 let g:php_syntax_extensions_enabled = ["bcmath", "bz2", "core", "curl", "date", "dom", "ereg", "gd", "gettext", "hash", "iconv", "json", "libxml", "mbstring", "mcrypt", "mhash", "mysql", "mysqli", "openssl", "pcre", "pdo", "pgsql", "phar", "reflection", "session", "simplexml", "soap", "sockets", "spl", "sqlite3", "standard", "tokenizer", "wddx", "xml", "xmlreader", "xmlwriter", "zip", "zlib"]
 
 let g:netrw_banner = 0
