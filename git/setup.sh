@@ -1,8 +1,24 @@
 #!/bin/bash
 
 # profile
-git config --global user.name 'Lasse Nielsen'
-echo "Remember to run 'git config --global user.email <email>'"
+NAME="Lasse Nielsen"
+EMAIL="charmixer@users.noreply.github.com"
+GNAME=$(git config --global user.name)
+GEMAIL=$(git config --global user.email)
+
+if [ "$GNAME" == "" ]; then
+  echo "Global user.name not set, using $NAME"
+  git config --global user.name "$NAME"
+else
+  echo "Global name already set to $GNAME, skipping"
+fi
+
+if [ "$GEMAIL" == "" ]; then
+  echo "Global user.email not set, using $EMAIL"
+  git config --global user.email "$EMAIL"
+else
+  echo "Global email already set to $GEMAIL, skipping"
+fi
 
 # alias
 git config --global alias.co checkout
