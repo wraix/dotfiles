@@ -4,8 +4,8 @@ export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
 export BROWSER=/usr/bin/firefox
 
 # setup keyring
-export `gnome-keyring-daemon -s -d -c pkcsll,secrets,ssh`
-
+eval `keychain --agents ssh --eval id_rsa prv_rsa`
+#export `gnome-keyring-daemon -s -d -c ssh`
 
 # Foreground colors, Normal (non-bold) is the default, so the 0; prefix is optional.
 FG_DARKGRAY="\[0;30m"

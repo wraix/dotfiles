@@ -24,6 +24,8 @@ endif
   Plug 'tpope/vim-surround'
   " Enables repeat for some plugins
   Plug 'tpope/vim-repeat'
+  " Go specific functions
+  Plug 'fatih/vim-go'
   " Comments
   Plug 'scrooloose/nerdcommenter'
   " Better status bar
@@ -129,14 +131,15 @@ set showmatch
 set hidden
 set noshowmode
 set clipboard=unnamedplus
-set shiftwidth=2
 set smartindent
 set autoindent        " Use autoindentation
 set smarttab
+set shiftwidth=2
 set softtabstop=2
+set tabstop=2
 set expandtab         " Use spaces instead of tabs
 set list
-set listchars=tab:>-,trail:*,extends:>,precedes:<
+set listchars=tab:>-,extends:>,precedes:\<
 set fileencoding=utf-8
 set lazyredraw
 set showmatch         " Show matching braces
@@ -151,6 +154,17 @@ set cursorline        " Highlight the current line
 set autoread          " Automatically reload the file when it is changed from an outside program
 set numberwidth=5     " give gutter a bit more spacing to prevent jumping
 set mouse=a           " make mouse interactive
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+
+" golang specific
+augroup ft_go
+  " au BufNewFile,BufRead *.go setlocal listchars=tab\ \ ,trail:*
+  " au BufNewFile,BufRead *.go setlocal noet ts=2 sw=2 sts=2
+
+  " au Filetype go setlocal tabstop=2 shiftwidth=2 softtabstop=2 noexpandtab
+  au Filetype go setlocal noexpandtab listchars+=tab:\ \  listchars-=tab:>-
+augroup END
 
 " enter visual mode when selecting text and dont copy line numbers
 " set mouse+=a
@@ -178,13 +192,19 @@ let g:fzf_action = {
 " let g:NERDTreeDirArrowExpandable = '+'
 " let g:NERDTreeDirArrowCollapsible = '-'
 
-" disable linting while typing
+" ALE settings
 let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_enter = 0
+let g:ale_lint_on_enter = 1
+let g:ale_lint_on_insert_leave = 1
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_info_str = 'I'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-let g:ale_open_list = 1
+let g:ale_sign_highlight_linenrs=1
+let g:ale_open_list = 0
 let g:ale_keep_list_window_open=0
-let g:ale_set_quickfix=0
+let g:ale_sign_column_always = 1
+let g:ale_set_quickfix = 1
 let g:ale_list_window_size = 5
 let g:ale_php_phpcbf_standard='PSR2'
 let g:ale_php_phpcs_standard='phpcs.xml.dist'
@@ -192,7 +212,7 @@ let g:ale_php_phpmd_ruleset='phpmd.xml'
 let g:ale_fix_on_save = 1
 let g:ale_fixers = { '*': ['remove_trailing_lines', 'trim_whitespace'] }
 
-let g:php_sql_query = 0
+let g:php_sql_query = 1
 let g:php_sql_heredoc = 1
 let g:php_sql_nowdoc = 1
 let g:php_html_load = 0
