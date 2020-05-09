@@ -60,6 +60,8 @@ endif
   " More targets to make actions on; eg. inq (in quotes), seperators (special
   " chars), inb (in blocks (, [, {, etc.)
   Plug 'wellle/targets.vim'
+  " Add support for autocomplete quotes and brackets
+  Plug 'jiangmiao/auto-pairs'
 call plug#end()
 
 "--------------------------
