@@ -27,7 +27,7 @@ endif
   " Go specific functions
   Plug 'fatih/vim-go'
   " Comments
-  Plug 'scrooloose/nerdcommenter'
+  " Plug 'tomtom/tcomment_vim'
   " Better status bar
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
@@ -36,7 +36,7 @@ endif
   " Better PHP colors
   Plug 'StanAngeloff/php.vim', {'for': 'php'}
   " Show colors in css
-  Plug 'ap/vim-css-color'
+  Plug 'lilydjwg/colorizer'
   " install fzf for quick find and open files
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   " Vim plugin for fzf
@@ -60,8 +60,13 @@ endif
   " More targets to make actions on; eg. inq (in quotes), seperators (special
   " chars), inb (in blocks (, [, {, etc.)
   Plug 'wellle/targets.vim'
-  " Add support for autocomplete quotes and brackets
-  Plug 'jiangmiao/auto-pairs'
+  " Added support for autocomplete quotes and brackets
+  Plug 'raimondi/delimitmate'
+  " Markdown support
+  Plug 'plasticboy/vim-markdown'
+  " tagbar
+  Plug 'majutsushi/tagbar'
+  Plug 'terryma/vim-multiple-cursors'
 call plug#end()
 
 "--------------------------
@@ -168,6 +173,12 @@ augroup ft_go
   au Filetype go setlocal noexpandtab listchars+=tab:\ \  listchars-=tab:>-
 augroup END
 
+augroup term_specifics
+  autocmd!
+  autocmd TermOpen * startinsert
+  autocmd TermOpen * setlocal norelativenumber bufhidden=hide hidden
+augroup END
+
 " enter visual mode when selecting text and dont copy line numbers
 " set mouse+=a
 
@@ -222,6 +233,8 @@ let g:php_html_in_heredoc = 1
 let g:php_html_in_nowdoc = 1
 let g:php_var_selector_is_identifier = 0
 let g:php_syntax_extensions_enabled = ["bcmath", "bz2", "core", "curl", "date", "dom", "ereg", "gd", "gettext", "hash", "iconv", "json", "libxml", "mbstring", "mcrypt", "mhash", "mysql", "mysqli", "openssl", "pcre", "pdo", "pgsql", "phar", "reflection", "session", "simplexml", "soap", "sockets", "spl", "sqlite3", "standard", "tokenizer", "wddx", "xml", "xmlreader", "xmlwriter", "zip", "zlib"]
+
+let g:airline#extensions#tabline#ignore_bufadd_pat = '!|defx|gundo|nerd_tree|startify|tagbar|undotree|vimfiler'
 
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
