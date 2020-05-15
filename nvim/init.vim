@@ -26,6 +26,8 @@ endif
   Plug 'tpope/vim-repeat'
   " Go specific functions
   Plug 'fatih/vim-go'
+  " CSV plugin
+  Plug 'mechatroner/rainbow_csv'
   " Comments
   " Plug 'tomtom/tcomment_vim'
   " Better status bar
