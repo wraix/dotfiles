@@ -28,6 +28,7 @@ endif
   Plug 'StanAngeloff/php.vim', {'for': 'php'}                       " Better PHP support
   Plug 'fatih/vim-go'                                               " Golang support
   Plug 'pangloss/vim-javascript'                                    " Improved js syntax
+  Plug 'mechatroner/rainbow_csv'                                    " Better CSV support
   Plug 'lilydjwg/colorizer'                                         " Show colors in css
   Plug 'w0rp/ale'                                                   " Async linter
 
