@@ -17,56 +17,38 @@ else
 
   call plug#begin('~/.vim/bundle')
 endif
-  Plug 'ludovicchabant/vim-gutentags'
-  " Git for vim, :G... to use
-  Plug 'tpope/vim-fugitive'
-  " Quick surrounding with eg. ys<motion> (remember with 'you surround')
-  Plug 'tpope/vim-surround'
-  " Enables repeat for some plugins
-  Plug 'tpope/vim-repeat'
-  " Go specific functions
-  Plug 'fatih/vim-go'
-  " Comments
-  " Plug 'tomtom/tcomment_vim'
-  " Better status bar
-  Plug 'vim-airline/vim-airline'
-  Plug 'vim-airline/vim-airline-themes'
-  " Color scheme
-  Plug 'lifepillar/vim-solarized8'
-  " Better PHP colors
-  Plug 'StanAngeloff/php.vim', {'for': 'php'}
-  " Show colors in css
-  Plug 'lilydjwg/colorizer'
-  " install fzf for quick find and open files
-  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-  " Vim plugin for fzf
-  Plug 'junegunn/fzf.vim'
-  " Async linter
-  Plug 'w0rp/ale'
-  " Directory explorer
-  Plug 'scrooloose/nerdtree'
-  " Easier buffer handling <leader>b
-  Plug 'moll/vim-bbye'
-  " Show git changes in gutter
-  Plug 'airblade/vim-gitgutter'
-  " Faster moving in files <leader><leader>w|b
-  Plug 'easymotion/vim-easymotion'
-  " Better clipboard handling
-  Plug 'svermeulen/vim-easyclip'
-  " Enables filecontrols directly within vim; :Move, :Delete, :Rename, etc.
-  Plug 'tpope/vim-eunuch'
-  " Align with ga
-  Plug 'junegunn/vim-easy-align'
-  " More targets to make actions on; eg. inq (in quotes), seperators (special
-  " chars), inb (in blocks (, [, {, etc.)
-  Plug 'wellle/targets.vim'
-  " Added support for autocomplete quotes and brackets
-  Plug 'raimondi/delimitmate'
-  " Markdown support
-  Plug 'plasticboy/vim-markdown'
-  " tagbar
-  Plug 'majutsushi/tagbar'
-  Plug 'terryma/vim-multiple-cursors'
+  " Apperance:
+  Plug 'vim-airline/vim-airline'                                    " Statusbar
+  Plug 'vim-airline/vim-airline-themes'                             " Theming for statusbar
+  Plug 'lifepillar/vim-solarized8'                                  " Solarized color scheme
+  Plug 'mhinz/vim-signify'                                          " git gutter
+  Plug 'majutsushi/tagbar'                                          " Show tags in statusbar and navigate them
+
+  " Syntax:
+  Plug 'StanAngeloff/php.vim', {'for': 'php'}                       " Better PHP support
+  Plug 'fatih/vim-go'                                               " Golang support
+  Plug 'pangloss/vim-javascript'                                    " Improved js syntax
+  Plug 'lilydjwg/colorizer'                                         " Show colors in css
+  Plug 'w0rp/ale'                                                   " Async linter
+
+  " Navigation:
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " Install fzf
+  Plug 'junegunn/fzf.vim'                                           " FZF vim plugin
+  Plug 'moll/vim-bbye'                                              " Easier buffer handling <leader>b
+  Plug 'easymotion/vim-easymotion'                                  " Faster moving in files <leader><leader>w|b
+  Plug 'wellle/targets.vim'                                         " More targets to make actions on; eg. inq (in quotes), seperators (specialchars), inb (in blocks (, [, {, etc.)
+  Plug 'svermeulen/vim-easyclip'                                    " Better clipboard handling
+
+  " Misc:
+  Plug 'tpope/vim-eunuch'                                           " Enables filecontrols directly within vim; :Move, :Delete, :Rename, etc.
+  Plug 'tpope/vim-fugitive'                                         " Git for vim, :G... to use
+  Plug 'tpope/vim-repeat'                                           " Enables repeat for some plugins
+  Plug 'tpope/vim-surround'                                         " Quick surrounding with eg. ys<motion> (remember with 'you surround')
+  Plug 'raimondi/delimitmate'                                       " Added support for autocomplete quotes and brackets
+  Plug 'ludovicchabant/vim-gutentags'                               " Setup ctags file
+  Plug 'tomtom/tcomment_vim'                                        " Comments
+  Plug 'junegunn/vim-easy-align'                                    " Align text
+
 call plug#end()
 
 "--------------------------
@@ -202,9 +184,6 @@ let g:fzf_action = {
   \ 'ctrl-h': 'botright split',
   \ 'ctrl-v': 'vertical botright split' }
 
-" let g:NERDTreeDirArrowExpandable = '+'
-" let g:NERDTreeDirArrowCollapsible = '-'
-
 " ALE settings
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 1
@@ -236,11 +215,20 @@ let g:php_syntax_extensions_enabled = ["bcmath", "bz2", "core", "curl", "date", 
 
 let g:airline#extensions#tabline#ignore_bufadd_pat = '!|defx|gundo|nerd_tree|startify|tagbar|undotree|vimfiler'
 
+let g:signify_sign_show_text         = 1
+let g:signify_line_highlight         = 0
+let g:signify_sign_add               = '+'
+let g:signify_sign_delete            = '_'
+let g:signify_sign_delete_first_line = '‾'
+let g:signify_sign_change            = '!'
+
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
 let g:netrw_browse_split = 4
 let g:netrw_altv = 1
-let g:netrw_winsize = 25
+let g:netrw_winsize = 15
+
+set updatetime=500
 
 "--------------------------
 "|        Mappings        |
@@ -263,6 +251,20 @@ nnoremap <C-N> :bprev<CR>
 nnoremap <leader>x :Bdelete<CR>
 nnoremap * :keepjumps normal! mi*`i<CR>
 vnoremap // y/<C-R>"<CR>
+
+nnoremap <leader>gd :SignifyDiff<cr>
+nnoremap <leader>gp :SignifyHunkDiff<cr>
+nnoremap <leader>gu :SignifyHunkUndo<cr>
+
+" hunk jumping
+nmap <leader>gj <plug>(signify-next-hunk)
+nmap <leader>gk <plug>(signify-prev-hunk)
+
+" hunk text object
+omap ic <plug>(signify-motion-inner-pending)
+xmap ic <plug>(signify-motion-inner-visual)
+omap ac <plug>(signify-motion-outer-pending)
+xmap ac <plug>(signify-motion-outer-visual)
 
 " nnoremap <up> <C-w>k
 " nnoremap <down> <C-w>j
