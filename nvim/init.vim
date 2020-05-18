@@ -92,6 +92,7 @@ endtry
 let g:airline#extensions#tabline#enabled=1
 let g:airline_theme='solarized'
 let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#ignore_bufadd_pat = '!|defx|gundo|nerd_tree|startify|tagbar|undotree|vimfiler'
 
 filetype indent on    " Use filetype indentation
 filetype plugin indent on " Allow plugins to use filetype indentation
@@ -214,7 +215,6 @@ let g:php_html_in_nowdoc = 1
 let g:php_var_selector_is_identifier = 0
 let g:php_syntax_extensions_enabled = ["bcmath", "bz2", "core", "curl", "date", "dom", "ereg", "gd", "gettext", "hash", "iconv", "json", "libxml", "mbstring", "mcrypt", "mhash", "mysql", "mysqli", "openssl", "pcre", "pdo", "pgsql", "phar", "reflection", "session", "simplexml", "soap", "sockets", "spl", "sqlite3", "standard", "tokenizer", "wddx", "xml", "xmlreader", "xmlwriter", "zip", "zlib"]
 
-let g:airline#extensions#tabline#ignore_bufadd_pat = '!|defx|gundo|nerd_tree|startify|tagbar|undotree|vimfiler'
 
 let g:signify_sign_show_text         = 1
 let g:signify_line_highlight         = 0
