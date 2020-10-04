@@ -42,11 +42,15 @@ endif
 
   " Text Manipulation:
   Plug 'tpope/vim-surround'                                         " Quick surrounding with eg. ys<motion> (remember with 'you surround')
-  Plug 'tomtom/tcomment_vim'                                        " Comments
+  Plug 'preservim/nerdcommenter'
+  " Plug 'tomtom/tcomment_vim'                                        " Comments
   Plug 'junegunn/vim-easy-align'                                    " Align text
+  Plug 'jiangmiao/auto-pairs'
+  " dsadas
+  "
 
   " Misc:
-  Plug 'tpope/vim-eunuch'                                           " Enables filecontrols directly within vim; :Move, :Delete, :Rename, etc.
+  " Plug 'tpope/vim-eunuch'                                           " Enables filecontrols directly within vim; :Move, :Delete, :Rename, etc.
   Plug 'tpope/vim-fugitive'                                         " Git for vim, :G... to use
   Plug 'tpope/vim-repeat'                                           " Enables repeat for some plugins
   Plug 'ludovicchabant/vim-gutentags'                               " Setup ctags file
@@ -147,6 +151,7 @@ set cursorline        " Highlight the current line
 set autoread          " Automatically reload the file when it is changed from an outside program
 set numberwidth=5     " give gutter a bit more spacing to prevent jumping
 set mouse=a           " make mouse interactive
+set formatoptions-=cro
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
 
@@ -208,14 +213,26 @@ let g:php_html_in_nowdoc = 1
 let g:php_var_selector_is_identifier = 0
 let g:php_syntax_extensions_enabled = ["bcmath", "bz2", "core", "curl", "date", "dom", "ereg", "gd", "gettext", "hash", "iconv", "json", "libxml", "mbstring", "mcrypt", "mhash", "mysql", "mysqli", "openssl", "pcre", "pdo", "pgsql", "phar", "reflection", "session", "simplexml", "soap", "sockets", "spl", "sqlite3", "standard", "tokenizer", "wddx", "xml", "xmlreader", "xmlwriter", "zip", "zlib"]
 
-
+" git gutter
 let g:signify_sign_show_text         = 1
+let g:signify_sign_show_count        = 1
 let g:signify_line_highlight         = 0
 let g:signify_sign_add               = '+'
 let g:signify_sign_delete            = '_'
 let g:signify_sign_delete_first_line = '‾'
 let g:signify_sign_change            = '!'
 
+highlight SignColumn                 ctermbg=NONE guibg=NONE
+highlight SignifySignAdd             ctermbg=NONE guibg=NONE ctermfg=green guifg=#4fab4f
+highlight SignifySignChange          ctermbg=NONE guibg=NONE ctermfg=green guifg=#4fab4f
+highlight SignifySignDelete          ctermbg=NONE guibg=NONE ctermfg=red   guifg=#e34b67
+highlight SignifySignDeleteFirstLine ctermbg=NONE guibg=NONE ctermfg=red   guifg=#e34b67
+highlight SignifyLineAdd             ctermbg=NONE  guibg=NONE    ctermfg=NONE  guifg=NONE
+highlight SignifyLineChange          ctermbg=NONE  guibg=NONE    ctermfg=NONE  guifg=NONE
+highlight SignifyLineDelete          ctermbg=NONE  guibg=NONE    ctermfg=NONE  guifg=NONE
+highlight SignifyLineDeleteFirstLine ctermbg=NONE  guibg=NONE    ctermfg=NONE  guifg=NONE
+
+" file browser
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
 let g:netrw_browse_split = 4
@@ -228,7 +245,7 @@ let g:go_autodetect_gopath = 1
 let g:go_list_type = "quickfix"
 
 let g:go_highlight_types = 1
-let g:go_highlight_fields = 1
+let g:go_highlight_fields = 0
 let g:go_highlight_functions = 1
 let g:go_highlight_function_calls = 1
 let g:go_highlight_extra_types = 0
@@ -250,16 +267,8 @@ augroup go
   autocmd FileType go nmap <leader>r <Plug>(go-run)
   " :GoDoc
   autocmd FileType go nmap <Leader>d <Plug>(go-doc)
-  " :GoCoverageToggle
-  autocmd FileType go nmap <Leader>c <Plug>(go-coverage-toggle)
   " :GoInfo
   autocmd FileType go nmap <Leader>i <Plug>(go-info)
-  " :GoMetaLinter
-  autocmd FileType go nmap <Leader>l <Plug>(go-metalinter)
-  " :GoDef but opens in a vertical split
-  autocmd FileType go nmap <Leader>v <Plug>(go-def-vertical)
-  " :GoDef but opens in a horizontal split
-  autocmd FileType go nmap <Leader>s <Plug>(go-def-split)
 augroup END
 
 " build_go_files is a custom function that builds or compiles the test file.
