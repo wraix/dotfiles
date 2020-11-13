@@ -4,7 +4,21 @@ export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
 export BROWSER=/usr/bin/firefox
 
 # setup keyring
-eval `keychain --agents ssh --eval id_rsa prv_rsa`
+if ! pgrep -x ssh-agent -u $(id -u) >/dev/null; then
+  # This sets SSH_AUTH_SOCK and SSH_AGENT_PID variables
+  eval "$(ssh-agent -s)"
+  export SSH_AUTH_SOCK SSH_AGENT_PID
+  cat <<EOT > $XDG_RUNTIME_DIR/ssh-agent-env
+export SSH_AUTH_SOCK=$SSH_AUTH_SOCK
+export SSH_AGENT_PID=$SSH_AGENT_PID
+EOT
+else
+  if [ -s "$XDG_RUNTIME_DIR/ssh-agent-env" ]; then
+    . $XDG_RUNTIME_DIR/ssh-agent-env
+  fi
+fi
+
+#eval `keychain --agents ssh --eval id_rsa prv_rsa`
 #export `gnome-keyring-daemon -s -d -c ssh`
 
 # Foreground colors, Normal (non-bold) is the default, so the 0; prefix is optional.
