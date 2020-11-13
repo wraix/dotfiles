@@ -27,10 +27,12 @@ endif
   " Syntax:
   Plug 'StanAngeloff/php.vim', {'for': 'php'}                       " Better PHP support
   Plug 'fatih/vim-go'                                               " Golang support
-  Plug 'pangloss/vim-javascript'                                    " Improved js syntax
+  " Plug 'sheerun/vim-polyglot'
+  " Plug 'pangloss/vim-javascript'                                    " Improved js syntax
   Plug 'mechatroner/rainbow_csv'                                    " Better CSV support
-  Plug 'lilydjwg/colorizer'                                         " Show colors in css
+  " Plug 'lilydjwg/colorizer'                                         " Show colors in css
   Plug 'w0rp/ale'                                                   " Async linter
+  Plug 'neo4j-contrib/cypher-vim-syntax'
 
   " Navigation:
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " Install fzf
@@ -45,9 +47,7 @@ endif
   Plug 'preservim/nerdcommenter'
   " Plug 'tomtom/tcomment_vim'                                        " Comments
   Plug 'junegunn/vim-easy-align'                                    " Align text
-  Plug 'jiangmiao/auto-pairs'
-  " dsadas
-  "
+  " Plug 'jiangmiao/auto-pairs'
 
   " Misc:
   " Plug 'tpope/vim-eunuch'                                           " Enables filecontrols directly within vim; :Move, :Delete, :Rename, etc.
@@ -100,8 +100,8 @@ let g:airline_theme='solarized'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#ignore_bufadd_pat = '!|defx|gundo|nerd_tree|startify|tagbar|undotree|vimfiler'
 
-filetype indent on    " Use filetype indentation
-filetype plugin indent on " Allow plugins to use filetype indentation
+filetype indent off    " Use filetype indentation
+filetype plugin indent off " Allow plugins to use filetype indentation
 
 
 "--------------------------
@@ -129,7 +129,7 @@ set hidden
 set noshowmode
 set clipboard=unnamedplus
 set smartindent
-set autoindent        " Use autoindentation
+set noautoindent        " Use autoindentation
 set smarttab
 set shiftwidth=2
 set softtabstop=2
@@ -186,7 +186,7 @@ let g:fzf_action = {
 
 " ALE settings
 let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_enter = 1
+let g:ale_lint_on_enter = 0
 let g:ale_lint_on_insert_leave = 1
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
@@ -196,13 +196,20 @@ let g:ale_sign_highlight_linenrs=1
 let g:ale_open_list = 0
 let g:ale_keep_list_window_open=0
 let g:ale_sign_column_always = 1
+let g:ale_sign_error = "E"
+let g:ale_sign_info = "I"
+let g:ale_sign_style_error = "SE"
+let g:ale_sign_style_warning = "SW"
+let g:ale_sign_warning = "W"
+let g:ale_change_sign_column_color = 0
+let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 1
 let g:ale_list_window_size = 5
 let g:ale_php_phpcbf_standard='PSR2'
 let g:ale_php_phpcs_standard='phpcs.xml.dist'
 let g:ale_php_phpmd_ruleset='phpmd.xml'
 let g:ale_fix_on_save = 1
-let g:ale_fixers = { '*': ['remove_trailing_lines', 'trim_whitespace'] }
+let g:ale_fixers = { 'go': ['goimports'], '*': ['remove_trailing_lines', 'trim_whitespace'] }
 
 let g:php_sql_query = 1
 let g:php_sql_heredoc = 1
@@ -242,7 +249,8 @@ let g:netrw_winsize = 15
 " vim-go:
 let g:go_fmt_command = "goimports"
 let g:go_autodetect_gopath = 1
-let g:go_list_type = "quickfix"
+let g:go_list_type = ""
+let g:go_fmt_fail_silently = 1
 
 let g:go_highlight_types = 1
 let g:go_highlight_fields = 0
