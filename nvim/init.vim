@@ -27,6 +27,8 @@ endif
   " Syntax:
   Plug 'StanAngeloff/php.vim', {'for': 'php'}                       " Better PHP support
   Plug 'fatih/vim-go'                                               " Golang support
+  Plug 'MaxMEllon/vim-jsx-pretty'                                   " JSX support
+  Plug 'leafgarland/typescript-vim'                                 " TypeScript support
   " Plug 'sheerun/vim-polyglot'
   " Plug 'pangloss/vim-javascript'                                    " Improved js syntax
   Plug 'mechatroner/rainbow_csv'                                    " Better CSV support
