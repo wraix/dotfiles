@@ -9,14 +9,14 @@ GSIGNING_KEY=$(git config --global user.signingkey)
 GAUTO_SIGN_COMMIT=$(git config --global commit.gpgSign)
 GAUTO_SIGN_TAG=$(git config --global tag.gpgSign)
 
-if [ "$GNAME" == "" ]; then
+if [ -z "$GNAME" ]; then
   echo "Global user.name not set, using $NAME"
   git config --global user.name "$NAME"
 else
   echo "Global name already set to $GNAME, skipping"
 fi
 
-if [ "$GEMAIL" == "" ]; then
+if [ -z "$GEMAIL" ]; then
   echo "Global user.email not set, using $EMAIL"
   git config --global user.email "$EMAIL"
 else
@@ -43,12 +43,13 @@ git config --global push.default current
 git config --global core.excludesfile ~/.config/git/ignore
 
 # GPG signing
-if [ "$GSIGNING_KEY" == "" ]; then
+if [ -z "$GSIGNING_KEY" ]; then
   echo "Global user.signingkey not set"
   read -p "Set signingkey (empty for skip): " SIGNING_KEY
-  if [ "$SIGNING_KEY" != "" ]; then
+  if [ ! -z "$SIGNING_KEY" ]; then
     git config --global user.signingkey $SIGNING_KEY
     echo "user.signingkey set to $SIGNING_KEY"
+    GSIGNING_KEY=$SIGNING_KEY
   else
     echo "Skipping user.signingkey"
   fi
@@ -57,33 +58,37 @@ else
 fi
 
 # Auto sign commits
-if [ "$GAUTO_SIGN_COMMIT" == "" -o "$GAUTO_SIGN_COMMIT" == "false" ] && [ "$GSIGNING_KEY" != "" ]; then
-  echo "Global commit.gpgSign not set or set to false"
-  read -p "Should git auto sign commits with gpg key? (y/n): " AUTO_SIGN_COMMIT
-  if [ "$AUTO_SIGN_COMMIT" == "y" ]; then
-    git config --global commit.gpgSign true
-    echo "commit.gpgSign set to true"
+if [[ ! -z "$GSIGNING_KEY" ]]; then
+  if [[ -z "$GAUTO_SIGN_COMMIT" || "$GAUTO_SIGN_COMMIT" == "false" ]]; then
+    echo "Global commit.gpgSign not set or set to false"
+    read -p "Should git auto sign commits with gpg key? (y/n): " AUTO_SIGN_COMMIT
+    if [ "$AUTO_SIGN_COMMIT" == "y" ]; then
+      git config --global commit.gpgSign true
+      echo "commit.gpgSign set to true"
+    else
+      git config --global commit.gpgSign false
+      echo "commit.gpgSign set to false"
+    fi
   else
-    git config --global commit.gpgSign false
-    echo "commit.gpgSign set to false"
+    echo "Global commit.gpgSign already set to $GAUTO_SIGN_COMMIT, skipping"
   fi
-else
-  echo "Global commit.gpgSign already set to $GAUTO_SIGN_COMMIT, skipping"
 fi
 
 # Auto sign tags
-if [ "$GAUTO_SIGN_TAG" == "" -o "$GAUTO_SIGN_TAG" == "false"] && [ "$GSIGNING_KEY" != "" ]; then
-  echo "Global tag.gpgSign not set or set to false"
-  read -p "Should git auto sign tag with gpg key? (y/n): " AUTO_SIGN_TAG
-  if [ "$AUTO_SIGN_TAG" == "y" ]; then
-    git config --global tag.gpgSign true
-    echo "tag.gpgSign set to true"
+if [[ ! -z "$GSIGNING_KEY" ]]; then
+  if [[ -z "$GAUTO_SIGN_TAG" || "$GAUTO_SIGN_TAG" == "false" ]]; then
+    echo "Global tag.gpgSign not set or set to false"
+    read -p "Should git auto sign tag with gpg key? (y/n): " AUTO_SIGN_TAG
+    if [ "$AUTO_SIGN_TAG" == "y" ]; then
+      git config --global tag.gpgSign true
+      echo "tag.gpgSign set to true"
+    else
+      git config --global tag.gpgSign false
+      echo "tag.gpgSign set to false"
+    fi
   else
-    git config --global tag.gpgSign false
-    echo "tag.gpgSign set to false"
+    echo "Global tag.gpgSign already set to $GAUTO_SIGN_TAG, skipping"
   fi
-else
-  echo "Global tag.gpgSign already set to $GAUTO_SIGN_TAG, skipping"
 fi
 
 mkdir -p ~/.config/git
