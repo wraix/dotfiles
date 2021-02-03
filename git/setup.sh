@@ -5,6 +5,9 @@ NAME="Lasse Nielsen"
 EMAIL="charmixer@users.noreply.github.com"
 GNAME=$(git config --global user.name)
 GEMAIL=$(git config --global user.email)
+GSIGNING_KEY=$(git config --global user.signingkey)
+GAUTO_SIGN_COMMIT=$(git config --global commit.gpgSign)
+GAUTO_SIGN_TAG=$(git config --global tag.gpgSign)
 
 if [ "$GNAME" == "" ]; then
   echo "Global user.name not set, using $NAME"
@@ -38,6 +41,50 @@ git config --global push.default current
 
 # enable global ignore file for all projects
 git config --global core.excludesfile ~/.config/git/ignore
+
+# GPG signing
+if [ "$GSIGNING_KEY" == "" ]; then
+  echo "Global user.signingkey not set"
+  read -p "Set signingkey (empty for skip): " SIGNING_KEY
+  if [ "$SIGNING_KEY" != "" ]; then
+    git config --global user.signingkey $SIGNING_KEY
+    echo "user.signingkey set to $SIGNING_KEY"
+  else
+    echo "Skipping user.signingkey"
+  fi
+else
+  echo "Global signingkey already set to $GSIGNING_KEY, skipping"
+fi
+
+# Auto sign commits
+if [ "$GAUTO_SIGN_COMMIT" == "" -o "$GAUTO_SIGN_COMMIT" == "false" ] && [ "$GSIGNING_KEY" != "" ]; then
+  echo "Global commit.gpgSign not set or set to false"
+  read -p "Should git auto sign commits with gpg key? (y/n): " AUTO_SIGN_COMMIT
+  if [ "$AUTO_SIGN_COMMIT" == "y" ]; then
+    git config --global commit.gpgSign true
+    echo "commit.gpgSign set to true"
+  else
+    git config --global commit.gpgSign false
+    echo "commit.gpgSign set to false"
+  fi
+else
+  echo "Global commit.gpgSign already set to $GAUTO_SIGN_COMMIT, skipping"
+fi
+
+# Auto sign tags
+if [ "$GAUTO_SIGN_TAG" == "" -o "$GAUTO_SIGN_TAG" == "false"] && [ "$GSIGNING_KEY" != "" ]; then
+  echo "Global tag.gpgSign not set or set to false"
+  read -p "Should git auto sign tag with gpg key? (y/n): " AUTO_SIGN_TAG
+  if [ "$AUTO_SIGN_TAG" == "y" ]; then
+    git config --global tag.gpgSign true
+    echo "tag.gpgSign set to true"
+  else
+    git config --global tag.gpgSign false
+    echo "tag.gpgSign set to false"
+  fi
+else
+  echo "Global tag.gpgSign already set to $GAUTO_SIGN_TAG, skipping"
+fi
 
 mkdir -p ~/.config/git
 if [ ! -f ~/.config/git/ignore ]; then
