@@ -11,6 +11,6 @@ sudo mv ./nvim.appimage /usr/local/bin/nvim
 
 mkdir -p ~/.config/nvim
 rm -f ~/.config/nvim/init.vim
-ln -s "$SCRIPTDIR/init.vim" ~/.config/nvim/
+ln -i -v -s "$SCRIPTDIR/init.vim" ~/.config/nvim/
 
 nvim +PlugInstall +qall

@@ -1,1 +1,1 @@
-git vim pulseaudio pa-applet pavucontrol traceroute iftop dialog wifi-menu
+git vim zsh tilix traceroute iftop dialog wifi-menu
