@@ -1,5 +1,8 @@
 #!/bin/bash
 
+SCRIPT=`realpath $0`
+SCRIPTDIR=`dirname $SCRIPT`
+
 # profile
 NAME="Lasse Nielsen"
 EMAIL="charmixer@users.noreply.github.com"
@@ -94,10 +97,4 @@ if [[ ! -z "$GSIGNING_KEY" ]]; then
 fi
 
 mkdir -p ~/.config/git
-if [ ! -f ~/.config/git/ignore ]; then
-  touch ~/.config/git/ignore
-  echo "tags" >> ~/.config/git/ignore
-  echo "tags.temp" >> ~/.config/git/ignore
-else
-  echo "Found ~/.config/git/ignore, leaving it alone"
-fi
+ln -i -v -s "$SCRIPTDIR/ignore" ~/.config/git/ignore
