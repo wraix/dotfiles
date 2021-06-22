@@ -20,6 +20,10 @@
 'builtin' 'setopt' 'no_aliases' 'no_sh_glob' 'brace_expand'
 
 () {
+  typeset -g POWERLEVEL9K_TRANSIENT_PROMPT=off
+  function p10k-on-pre-prompt() {}
+  function p10k-on-post-prompt() {}
+
   emulate -L zsh -o extended_glob
 
   # Unset all configuration options. This allows you to apply configuration changes without

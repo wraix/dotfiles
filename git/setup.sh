@@ -36,6 +36,8 @@ git config --global alias.tree "log --color --graph --pretty=format:'%Cred%h%Cre
 # git reset HEAD -- fileA
 git config --global alias.unstage 'reset HEAD --'
 
+git config --global pull.rebase false
+
 # omit --set-upstream origin branch with this - allows for git push -u instead
 git config --global push.default current
 

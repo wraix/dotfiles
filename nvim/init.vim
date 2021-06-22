@@ -101,6 +101,8 @@ let g:airline#extensions#tabline#enabled=1
 let g:airline_theme='solarized'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#ignore_bufadd_pat = '!|defx|gundo|nerd_tree|startify|tagbar|undotree|vimfiler'
+" old vim-powerline symbols
+  " let g:airline_left_alt_sep = '⮁'
 
 filetype indent off    " Use filetype indentation
 filetype plugin indent off " Allow plugins to use filetype indentation
