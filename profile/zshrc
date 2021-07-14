@@ -1,0 +1,2 @@
+# Ensure GPG is using terminal to ask for passphrase
+export GPG_TTY=$(tty)
